@@ -1,10 +1,16 @@
 import { createTreeCollection, TreeView } from "@chakra-ui/react"
+import type { JSX } from "@emotion/react/jsx-runtime"
+import { BiCollection } from "react-icons/bi"
+import { FcAbout } from "react-icons/fc"
 import { LuChevronRight, LuFile, LuFolder } from "react-icons/lu"
+import { RiContactsLine, RiFunctionAddLine } from "react-icons/ri"
+import { TbSmartHome } from "react-icons/tb"
 import { NavLink } from "react-router-dom"
 
 interface Node {
     id: string
-    name: string
+    name: string,
+    icon?: JSX.Element
     children?: Node[]
 }
 
@@ -20,11 +26,21 @@ const collection = createTreeCollection<Node>({
                 id: "Menu",
                 name: "Menu",
                 children: [
-                    { id: "Menu/Home.tsx", name: "Home.tsx" },
-                    { id: "Menu/About.tsx", name: "About.tsx" },
-                    { id: "Menu/Skills.tsx", name: "Skills.tsx" },
-                    { id: "Menu/Projects.tsx", name: "Projects.tsx" },
-                    { id: "Menu/Contact.tsx", name: "Contact.tsx" },
+                    { id: "Menu/Home.tsx", name: "Home.tsx",
+                        icon:<TbSmartHome />
+                     },
+                    { id: "Menu/About.tsx", name: "About.tsx",
+                         icon:<FcAbout />
+                     },
+                    { id: "Menu/Skills.tsx", name: "Skills.tsx",
+                         icon:<RiFunctionAddLine       />
+                     },
+                    { id: "Menu/Projects.tsx", name: "Projects.tsx",
+                        icon:<BiCollection  />
+                     },
+                    { id: "Menu/Contact.tsx", name: "Contact.tsx",
+                         icon:<RiContactsLine   />
+                     },
 
                 ],
             }
@@ -85,9 +101,10 @@ export default function SideMenu() {
                                     alignItems: 'center',
                                     width: '100%',
                                     paddingBlock: 8,
-                                    paddingInline: 4
+                                    paddingInline: 4,
+                                    gap: 8,
                                 }} to={`/${node.name.replace('.tsx', '').toLowerCase()}`}>
-                                    <LuFile />
+                                   {node.icon ? node.icon : <LuFile />}
                                     <TreeView.ItemText>{node.name}</TreeView.ItemText>
                                 </NavLink>
 
