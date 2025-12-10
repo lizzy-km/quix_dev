@@ -3,17 +3,18 @@ import { VscBug, VscChevronLeft, VscChevronRight } from "react-icons/vsc";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import SideMenu from "./SideMenu";
 import { SiTypescript } from "react-icons/si";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type SetStateAction } from "react";
 import { IoIosClose } from "react-icons/io";
 
 export default function Layout() {
     const navigate = useNavigate()
-    const [menuArr, setMenuArr] = useState<string[] | null>(['']);
+    const [menuArr, setMenuArr] = useState<string[]>([]);
 
     const { pathname } = useLocation()
 
 
     useEffect(() => {
+        
 
         setMenuArr(prev => {
             if (prev) {
@@ -102,16 +103,16 @@ export default function Layout() {
                                             <Text paddingInline={1} paddingBlock={1} bg={'transparent'} fontSize={'14px'}  >{item}</Text>
                                             {pathname.split('/')[1] + '.tsx' === item ?   <Box cursor={'pointer'} onClick={(e) => {
                                                 e.stopPropagation();
-                                                setMenuArr(prev => {
+                                                setMenuArr((prev )=> {
                                                     if (prev) {
-                                                        const filtered = prev.filter(i => i !== item);
+                                                        const filtered = (prev as string[]).filter(i => i !== item);
                                                         if (filtered.length === 0) {
                                                             navigate('/home');
                                                         }
-                                                        navigate(filtered[filtered.length - 1].split('.')[0]);
+                                                        navigate(filtered[0].split('.')[0]);
                                                         return filtered;
                                                     }
-                                                    return null;
+                                                    return [];
                                                 })
                                             }}  > <IoIosClose size={24} /></Box>: ''}
                                           
