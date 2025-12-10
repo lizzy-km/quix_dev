@@ -3,7 +3,7 @@ import { VscBug, VscChevronLeft, VscChevronRight } from "react-icons/vsc";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import SideMenu from "./SideMenu";
 import { SiTypescript } from "react-icons/si";
-import { useEffect, useState, type SetStateAction } from "react";
+import { useEffect, useState } from "react";
 import { IoIosClose } from "react-icons/io";
 
 export default function Layout() {
@@ -14,8 +14,6 @@ export default function Layout() {
 
 
     useEffect(() => {
-        
-
         setMenuArr(prev => {
             if (prev) {
                 if (!prev.includes(pathname.split('/')[1] + '.tsx')) {
@@ -25,7 +23,9 @@ export default function Layout() {
                 }
             }
             return [pathname.split('/')[1] + '.tsx']
-        });
+        })
+
+
 
     }, [pathname])
 
@@ -101,9 +101,9 @@ export default function Layout() {
                                         }} key={index} h={'34px'} paddingInline={2} alignContent={'center'} alignItems={'center'} gap={0} borderInline={'1px solid #33333380'} borderBottom={pathname.split('/')[1] + '.tsx' === item ? '2px solid #358ef1' : '1px solid #232425'} bg={pathname.split('/')[1] + '.tsx' === item ? '#33333380' : 'transparent'} >
                                             <SiTypescript size={14} />
                                             <Text paddingInline={1} paddingBlock={1} bg={'transparent'} fontSize={'14px'}  >{item}</Text>
-                                            {pathname.split('/')[1] + '.tsx' === item ?   <Box cursor={'pointer'} onClick={(e) => {
+                                            {pathname.split('/')[1] + '.tsx' === item ? <Box cursor={'pointer'} onClick={(e) => {
                                                 e.stopPropagation();
-                                                setMenuArr((prev )=> {
+                                                setMenuArr((prev) => {
                                                     if (prev) {
                                                         const filtered = (prev as string[]).filter(i => i !== item);
                                                         if (filtered.length === 0) {
@@ -114,8 +114,8 @@ export default function Layout() {
                                                     }
                                                     return [];
                                                 })
-                                            }}  > <IoIosClose size={24} /></Box>: ''}
-                                          
+                                            }}  > <IoIosClose size={24} /></Box> : ''}
+
 
 
 
