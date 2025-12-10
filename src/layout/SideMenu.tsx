@@ -1,11 +1,13 @@
 import { createTreeCollection, TreeView } from "@chakra-ui/react"
 import type { JSX } from "@emotion/react/jsx-runtime"
+import { useEffect } from "react"
 import { BiCollection } from "react-icons/bi"
 import { FcAbout } from "react-icons/fc"
 import { LuChevronRight, LuFile, LuFolder } from "react-icons/lu"
 import { RiContactsLine, RiFunctionAddLine } from "react-icons/ri"
-import { TbSmartHome } from "react-icons/tb"
-import { NavLink } from "react-router-dom"
+import { SiTypescript } from "react-icons/si"
+import { TbBrandTypescript, TbSmartHome, TbUserQuestion } from "react-icons/tb"
+import { NavLink, useLocation } from "react-router-dom"
 
 interface Node {
     id: string
@@ -30,7 +32,7 @@ const collection = createTreeCollection<Node>({
                         icon:<TbSmartHome />
                      },
                     { id: "Menu/About.tsx", name: "About.tsx",
-                         icon:<FcAbout />
+                         icon:<TbUserQuestion  />
                      },
                     { id: "Menu/Skills.tsx", name: "Skills.tsx",
                          icon:<RiFunctionAddLine       />
@@ -48,8 +50,11 @@ const collection = createTreeCollection<Node>({
     },
 })
 export default function SideMenu() {
+
+
+   
     return (
-        <TreeView.Root expandedValue={['Menu']} collection={collection} maxW="sm" expandOnClick={false}>
+        <TreeView.Root  expandedValue={['Menu']} collection={collection} maxW="sm" expandOnClick={false}>
             <TreeView.Label>Quix</TreeView.Label>
             <TreeView.Tree>
                 <TreeView.Node
@@ -80,7 +85,7 @@ export default function SideMenu() {
                                 <TreeView.BranchText>{node.name}</TreeView.BranchText>
                             </TreeView.BranchControl>
                         ) : (
-                            <TreeView.Item
+                            <TreeView.Item 
                                 _selected={{
                                     color: '#d8d8d8',
                                     backgroundColor: 'transparent'
@@ -95,7 +100,7 @@ export default function SideMenu() {
                                     marginBlock: '2px'
                                 }}
                             >
-                                <NavLink style={{
+                                <NavLink  style={{
                                     display: 'flex',
                                     justifyContent: 'center',
                                     alignItems: 'center',
@@ -104,7 +109,8 @@ export default function SideMenu() {
                                     paddingInline: 4,
                                     gap: 8,
                                 }} to={`/${node.name.replace('.tsx', '').toLowerCase()}`}>
-                                   {node.icon ? node.icon : <LuFile />}
+                                   {/* {node.icon ? node.icon : <LuFile />} */}
+                                   <SiTypescript />
                                     <TreeView.ItemText>{node.name}</TreeView.ItemText>
                                 </NavLink>
 

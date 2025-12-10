@@ -5,7 +5,11 @@
 
 .active{
   background-color: #d8d8d818 !important;
-  border-left: #0D5EA6 2px solid !important;
+  border-left: #358ef1 2px solid !important;
+
+  svg {
+    color: #358ef1 !important;
+  }
 }
 
 a:hover{
