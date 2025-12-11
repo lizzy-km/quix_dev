@@ -14,6 +14,7 @@ export default function Layout() {
 
 
     useEffect(() => {
+        if (pathname.length > 1) {
         setMenuArr(prev => {
             if (prev) {
                 if (!prev.includes(pathname.split('/')[1] + '.tsx')) {
@@ -24,7 +25,7 @@ export default function Layout() {
             }
             return [pathname.split('/')[1] + '.tsx']
         })
-
+    }
 
 
     }, [pathname])
@@ -84,7 +85,7 @@ export default function Layout() {
                     </Grid>
                 </GridItem> */}
                 <GridItem h={'100%'} colSpan={5} rowSpan={12}>
-                    <Box paddingInline={2} paddingBlock={4} h="100%" color={'#d8d8d8'} bg={'#232425'} >
+                    <Box paddingInline={2} paddingBlock={4} h="100%" color={'#d8d8d8'} bg={'#141414'} >
                         <SideMenu />
                     </Box>
                 </GridItem>
